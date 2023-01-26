@@ -1,0 +1,216 @@
+<html>
+
+<head>
+	<title> Mind Reader </title>
+	<style>
+		body {
+			text-align: center;
+		}
+		.in-middle {
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+		}
+
+		.numCards {
+			display: inline-table;
+			padding: 20px;
+			border: 1px solid white;
+		}
+
+		.numCardsColumn {
+			display: inline-table;
+			padding: 20px;
+		}
+
+		.colElems {
+			border: 2px solid white;
+			margin-top: 20px;
+			margin-left: 20px;
+			margin-right: 20px;
+		}
+
+		.button {
+			margin-top: 20px;
+			background-color: rgb(28, 31, 28);
+			border: 1px solid whitesmoke;
+			color: white;
+			padding: 15px 32px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 16px;
+			font-family: 'Courier New', Courier, monospace;
+		}
+
+		.screen {
+			margin-top: 100px;
+		}
+	</style>
+	<script>
+		var arr = [], l1 = [], l2 = [], l3 = [];
+		var suffleNo = 0, totalNos = 21, minNo = 1, maxNo = 100;
+
+		function generateRandomNumbers() {
+			arr = [];
+			while (arr.length < totalNos) {
+				var r = Math.floor(Math.random() * maxNo) + minNo;
+				if (arr.indexOf(r) === -1) arr.push(r);
+			}
+		}
+
+		function hideGameElements() {
+			document.getElementById('pickScreen').style.display = "none";
+			document.getElementById('columnSelectionScreen').style.display = "none";
+			document.getElementById('resultScreen').style.display = "none";
+		}
+
+		function displayMainList() {
+			generateRandomNumbers();
+			document.getElementById('home').style.display = "none";
+			document.getElementById('resultScreen').style.display = "none";
+			document.getElementById('pickScreen').style.display = "contents";
+			var contents = document.getElementById('mainArr');
+			contents.innerHTML = "";
+			arr.forEach(item => {
+				var content = `<div class="numCards">${item}</div>`;
+				contents.innerHTML += content;
+			})
+		}
+
+		function hideMainPick() {
+			document.getElementById('pickScreen').style.display = "none";
+			document.getElementById('columnSelectionScreen').style.display = "contents";
+		}
+
+		function startProcess() {
+			var promptSelection = document.getElementById('promptToSelect');
+			var contentToWrite = `<span> Please Choose! </span>`;
+			promptSelection.innerHTML = contentToWrite;
+
+			suffleNo = 1;
+			hideMainPick();
+			createInitialColumnElements();
+			displayThreeColumnList(l1, l2, l3);
+		}
+
+		function progress(lno) {
+			var promptSelection = document.getElementById('promptToSelect');
+			var contentToAppend = `<span> Again! </span>`;
+			promptSelection.innerHTML += contentToAppend;
+
+			suffleNo++;
+			if (suffleNo <= 3) {
+				var tempMl = [];
+				tempMl = createReshuffledArray(lno);
+				createReshuffledColumns(tempMl);
+				displayThreeColumnList(l1, l2, l3);
+			}
+			else if (suffleNo == 4) {
+				var tempMl = [];
+				displayResultScreen();
+				tempMl = createReshuffledArray(lno);
+				document.getElementById('result').innerHTML = tempMl[10];
+			}
+		}
+
+		function displayThreeColumnList(lst1, lst2, lst3) {
+			var list1Contents = document.getElementById('list1');
+			var list2Contents = document.getElementById('list2');
+			var list3Contents = document.getElementById('list3');
+
+			list1Contents.innerHTML = "";
+			lst1.forEach(item => {
+				var content = `<div class="numCardsColumn">${item}</div>`;
+				list1Contents.innerHTML += content;
+			});
+
+			list2Contents.innerHTML = "";
+			lst2.forEach(item => {
+				var content = `<div class="numCardsColumn">${item}</div>`;
+				list2Contents.innerHTML += content;
+			})
+
+			list3Contents.innerHTML = "";
+			lst3.forEach(item => {
+				var content = `<div class="numCardsColumn">${item}</div>`;
+				list3Contents.innerHTML += content;
+			})
+		}
+
+		function displayResultScreen() {
+			document.getElementById('resultScreen').style.display = "contents";
+			document.getElementById('columnSelectionScreen').style.display = "none";
+		}
+
+		function createReshuffledArray(lno) {
+			var shuffledArr = [];
+			if (lno == 'l1') {
+				shuffledArr.push(...l2); shuffledArr.push(...l1); shuffledArr.push(...l3);
+			} else if (lno == 'l2') {
+				shuffledArr.push(...l1); shuffledArr.push(...l2); shuffledArr.push(...l3);
+			} else if (lno == 'l3') {
+				shuffledArr.push(...l1); shuffledArr.push(...l3); shuffledArr.push(...l2);
+			}
+			return shuffledArr;
+		}
+
+		function createReshuffledColumns(tempMl) {
+			var tempL1 = [], tempL2 = [], tempL3 = [];
+			for (var j = 0; j < tempMl.length; j++) {
+				if (j == 0 || j == 3 || j == 6 || j == 9 || j == 12 || j == 15 || j == 18) { tempL1.push(tempMl[j]); }
+				if (j == 1 || j == 4 || j == 7 || j == 10 || j == 13 || j == 16 || j == 19) { tempL2.push(tempMl[j]); }
+				if (j == 2 || j == 5 || j == 8 || j == 11 || j == 14 || j == 17 || j == 20) { tempL3.push(tempMl[j]); }
+			}
+			l1 = tempL1; l2 = tempL2; l3 = tempL3;
+		}
+
+		function createInitialColumnElements() {
+			l1 = [], l2 = [], l3 = [];
+			for (var i = 0; i < arr.length; i++) {
+				if (i < 7) {
+					l1.push(arr[i]);
+				} else if (i > 6 && i < 14) {
+					l2.push(arr[i]);
+				} else if (i >= 14) {
+					l3.push(arr[i]);
+				}
+			}
+		}
+	</script>
+</head>
+
+<body onload="hideGameElements()"
+	style="background: rgba(12, 12, 12, 0.877); color: blanchedalmond; font-family: 'Courier New', Courier, monospace;">
+	<div id="home" class="in-middle">
+		<h1 style="font-size: 10vmin;">Mind Reader</h1>
+		<p style="font-size: 4vmin;">This is a mind reading game, where you will be shown a list of numbers in which you have to pick one. Then,
+			we can predict the number you have picked by asking you few questions. Please be honest to answer the
+			questions to correctly predict the result.</p>
+		<button onclick="displayMainList()" class="button" style="font-size: 6vmin;">Let's Play!</button>
+	</div>
+	<div id="pickScreen" class="screen">
+		<p style="font-size: 4vmin;">Please pick a number from the list and remember it!</p>
+		<div id="mainArr" style="font-size: 4vmin;"></div>
+		<button class="button" id="pickedConformationButton" style="font-size: 6vmin;" onclick="startProcess()">I Picked!</button>
+	</div>
+	<div id="columnSelectionScreen" class="screen">
+		<p style="font-size: 4vmin;">Please choose the set of numbers that has your picked number! Make sure to choose it right. Else, the result
+			will go wrong.</p>
+		<h4><u>you will be asked 3 times!</u></h4>
+		<div id="promptToSelect" style="color: #ff6666;">Please Choose!</div>
+		<div id="listCols">
+			<div id="list1" onclick="progress('l1')" class="colElems" style="font-size: 4vmin;"></div>
+			<div id="list2" onclick="progress('l2')" class="colElems" style="font-size: 4vmin;"></div>
+			<div id="list3" onclick="progress('l3')" class="colElems" style="font-size: 4vmin;"></div>
+		</div>
+	</div>
+	<div id="resultScreen" class="screen">
+		<span style="font-size: 4vmin;">your number is</span>
+		<div id="result" style="font-size: 10vmin; padding-top: 20px;"></div>
+		<button class="button" onclick="displayMainList()" style="font-size: 6vmin;">Replay</button>
+	</div>
+
+</body>
+
+</html>
