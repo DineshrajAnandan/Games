@@ -1,0 +1,69 @@
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Snake Game</title>
+    <script src="main.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="title-and-options">
+        <span style="color: black;">Snake</span>
+        <span style="color: red;">Game</span>
+        <select id="select-snake-speed">
+            <option value="500">Normal</option>
+            <option value="250">Medium</option>
+            <option value="100">Fast</option>
+        </select>
+        <button onclick="start()" class="start-button"> Start </button>
+        <button onclick="setHaltProcess()" class="halt-button"> Halt </button>
+    </div>
+
+    <div id="game-screen">
+        <div id="scoreBoard">
+            Score :
+            <span id="score-count"> 0 </span>
+        </div>
+        <div id="gameOver-Message">
+            Game Over!
+        </div>
+        <div class="table-container"></div>
+        <div id="game-controls">
+            <div class="svg-controls">
+                <div class="left" onclick="setMoveProp(true, false)">
+                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-circle-left" class="svg-inline--fa fa-chevron-circle-left fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 504C119 504 8 393 8 256S119 8 256 8s248 111 248 248-111 248-248 248zM142.1 273l135.5 135.5c9.4 9.4 24.6 9.4 33.9 0l17-17c9.4-9.4 9.4-24.6 0-33.9L226.9 256l101.6-101.6c9.4-9.4 9.4-24.6 0-33.9l-17-17c-9.4-9.4-24.6-9.4-33.9 0L142.1 239c-9.4 9.4-9.4 24.6 0 34z"></path></svg>
+                </div>
+                <div class="mid">
+                    <div class="arrow-up" onclick="setMoveProp(false, false)">
+                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-circle-up" class="svg-inline--fa fa-chevron-circle-up fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M8 256C8 119 119 8 256 8s248 111 248 248-111 248-248 248S8 393 8 256zm231-113.9L103.5 277.6c-9.4 9.4-9.4 24.6 0 33.9l17 17c9.4 9.4 24.6 9.4 33.9 0L256 226.9l101.6 101.6c9.4 9.4 24.6 9.4 33.9 0l17-17c9.4-9.4 9.4-24.6 0-33.9L273 142.1c-9.4-9.4-24.6-9.4-34 0z"></path></svg>
+                    </div>
+                    <div class="arrow-down" onclick="setMoveProp(false, true)">
+                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-circle-down" class="svg-inline--fa fa-chevron-circle-down fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M504 256c0 137-111 248-248 248S8 393 8 256 119 8 256 8s248 111 248 248zM273 369.9l135.5-135.5c9.4-9.4 9.4-24.6 0-33.9l-17-17c-9.4-9.4-24.6-9.4-33.9 0L256 285.1 154.4 183.5c-9.4-9.4-24.6-9.4-33.9 0l-17 17c-9.4 9.4-9.4 24.6 0 33.9L239 369.9c9.4 9.4 24.6 9.4 34 0z"></path></svg>
+                    </div>
+                </div>
+                <div class="right" onclick="setMoveProp(true, true)">
+                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-circle-right" class="svg-inline--fa fa-chevron-circle-right fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zm113.9 231L234.4 103.5c-9.4-9.4-24.6-9.4-33.9 0l-17 17c-9.4 9.4-9.4 24.6 0 33.9L285.1 256 183.5 357.6c-9.4 9.4-9.4 24.6 0 33.9l17 17c9.4 9.4 24.6 9.4 33.9 0L369.9 273c9.4-9.4 9.4-24.6 0-34z"></path></svg>
+                </div>
+            </div>
+
+
+            <!-- up arrow -->
+            <!-- <span onclick="setMoveProp(false, false)">&#8593;</span> -->
+            <!-- left arrow -->
+            <!-- <span onclick="setMoveProp(true, false)">&#8592;</span> -->
+            <!-- down arrow -->
+            <!-- <span onclick="setMoveProp(false, true)">&#8595;</span> -->
+            <!-- right arrow -->
+            <!-- <span onclick="setMoveProp(true, true)">&#8594;</span>
+            <span style="color: rgb(190, 180, 180);">/</span>
+            <span class="wasd-icons" onclick="setMoveProp(false, false)">W</span>
+            <span class="wasd-icons" onclick="setMoveProp(true, false)">A</span>
+            <span class="wasd-icons" onclick="setMoveProp(false, true)">S</span>
+            <span class="wasd-icons" onclick="setMoveProp(true, true)">D</span> -->
+        </div>
+    </div>
+</body>
+
+</html>
