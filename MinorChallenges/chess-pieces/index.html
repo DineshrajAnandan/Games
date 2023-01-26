@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <title>Chess Pieces</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="main.js"></script>
+        <script src="calc.js"></script>
+    </head>
+    <body>
+        <div class="pieces-deck">
+            <!-- black king -->
+            <div onclick="choosePiece('king')">&#9818;</div>
+            <!-- black queen -->
+            <div onclick="choosePiece('queen')">&#9819;</div>
+            <!-- black rook -->
+            <div onclick="choosePiece('rook')">&#9820;</div>
+            <!-- black bishop -->
+            <div onclick="choosePiece('bishop')">&#9821;</div>
+            <!-- black knight -->
+            <div onclick="choosePiece('knight')">&#9822;</div>
+            <!-- black pawn -->
+            <div onclick="choosePiece('pawn')">&#9823;</div>
+        </div>
+        <div id="chess-board-container"></div>
+
+        <div class="exchangeBlackPawn-pieces-deck" id="exchangeBlackPawn-div">
+            <!-- black queen -->
+            <div onclick="exchangePiece('queen')">&#9819;</div>
+            <!-- black rook -->
+            <div onclick="exchangePiece('rook')">&#9820;</div>
+            <!-- black bishop -->
+            <div onclick="exchangePiece('bishop')">&#9821;</div>
+            <!-- black knight -->
+            <div onclick="exchangePiece('knight')">&#9822;</div>
+        </div>
+    </body>
+</html>

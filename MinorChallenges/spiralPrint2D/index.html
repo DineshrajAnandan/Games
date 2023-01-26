@@ -1,0 +1,186 @@
+<html>
+
+<head>
+    <script>
+        // create a table DOM element
+        let tableSize = 10;
+        let paintDelay = 500; //ms
+        let isRandomColorPaint = false;
+        let boxFillcolor = '#000000';
+        let globalNonceObj;
+        let haltProcess = false;
+
+        function createTable() {
+            document.querySelector('div.table-container').innerHTML = '';
+            let table = document.createElement('table');
+            for (let i = 0; i < tableSize; i++) {
+                let tr = document.createElement('tr');
+                for (let j = 0; j < tableSize; j++) {
+                    let td = document.createElement('td');
+                    td.id = `${i}-${j}`;
+                    tr.appendChild(td);
+                }
+                table.appendChild(tr);
+            }
+            document.querySelector('div.table-container').appendChild(table);
+        }
+
+        function resetFill() {
+            document.querySelectorAll('td').forEach(elem => {
+                elem.style.background = 'white';
+            });
+        }
+
+        function initValues() {
+            let size = document.getElementById('size-2d').value.trim();
+            let delayTime = document.getElementById('delay-time').value.trim();
+            let fillcolor = document.getElementById('fillcolor').value.trim();
+            let randColorCheck = document.getElementById('rand-color-check').checked;
+
+            if (!!size) tableSize = parseInt(size);
+            if (!!delayTime) paintDelay = parseInt(delayTime);
+            if (!!fillcolor) boxFillcolor = fillcolor;
+            isRandomColorPaint = randColorCheck;
+        }
+
+        function checkInput() {
+            if (tableSize < 5 || tableSize > 50 || paintDelay < 0 || paintDelay > 2000) {
+                document.getElementById('error-text').style.display = 'block';
+                return false;
+            }
+            document.getElementById('error-text').style.display = 'none';
+            return true;
+        }
+
+        async function startSpiral() {
+            haltProcess = false;
+            let localNonceObj = globalNonceObj = new Object();
+            initValues();
+            if (!checkInput()) return;
+            createTable();
+            resetFill();
+            await processLogic(localNonceObj); //process initiate
+        }
+
+        async function processLogic(localNonceObj) {
+            // actual logic 
+            let i = 0, j = 0, times = tableSize, inc = true;
+            for (j = 0; j < times; j++) {
+                /************ halt check *************/
+                if (localNonceObj != globalNonceObj) return;
+                if (haltProcess) return;
+                /************ halt check *************/
+                document.getElementById(`${i}-${j}`).style.background =
+                    isRandomColorPaint ? getRandomColor() : boxFillcolor;
+                await delay(paintDelay);
+            }
+            j = (j > tableSize - 1) ? tableSize - 1 : j;
+            times--;
+            for (; times > 0; times--) {
+                /************ halt check *************/
+                if (localNonceObj != globalNonceObj) return;
+                if (haltProcess) return;
+                /************ halt check *************/
+                for (let t = 0; t < times; t++) {
+                    /************ halt check *************/
+                    if (localNonceObj != globalNonceObj) return;
+                    if (haltProcess) return;
+                    /************ halt check *************/
+                    i = inc ? i + 1 : i - 1;
+                    document.getElementById(`${i}-${j}`).style.background =
+                        isRandomColorPaint ? getRandomColor() : boxFillcolor;
+                    await delay(paintDelay);
+                }
+                inc = !inc;
+                for (let t = 0; t < times; t++) {
+                    /************ halt check *************/
+                    if (localNonceObj != globalNonceObj) return;
+                    if (haltProcess) return;
+                    /************ halt check *************/
+                    j = inc ? j + 1 : j - 1;
+                    document.getElementById(`${i}-${j}`).style.background =
+                        isRandomColorPaint ? getRandomColor() : boxFillcolor;
+                    await delay(paintDelay);
+                }
+            }
+        }
+
+        function setHaltProcess() {
+            haltProcess = true;
+        }
+
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        function delay(delayInms) {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    resolve();
+                }, delayInms);
+            });
+        }
+
+    </script>
+    <style>
+        td {
+            border: 1px solid rgb(0, 0, 0);
+            width: 4px;
+            height: 8px;
+        }
+
+        .table-container {
+            margin-top: 3em;
+            width: 100%;
+            text-align: center;
+        }
+
+        table {
+            margin: auto;
+        }
+
+        .controls-container {
+            display: flex;
+            width: 100%;
+            background: cornsilk;
+        }
+
+        .controls-container>* {
+            margin: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="controls-container">
+        <div>
+            <label for="size-2d"><b>Table Size : </b></label>
+            <input type="number" min="4" max="80" value="10" id="size-2d">
+            <label for="size-2d"> (min 5, max 50) </label>
+        </div>
+        <div>
+            <label for="delay-time"><b>Time delay : </b></label>
+            <input type="number" min="0" max="2000" step="100" value="500" id="delay-time">
+            <label for="delay-time"> (min 0, max 2000) </label>
+        </div>
+        <input type="color" id="fillcolor" name="fillcolor" value="#000000">
+        <label>
+            <input type="checkbox" id="rand-color-check">
+            <span>Random Color</span>
+        </label>
+        <button onclick="startSpiral()" id="start-button"> Start </button>
+        <button onclick="setHaltProcess()" id="halt-button"> [X] Halt </button>
+    </div>
+    <div style="color: white; display: none;background: rgb(224, 131, 131);" id="error-text">
+        Table size and Time delay should be within the limits
+    </div>
+    <div class="table-container"></div>
+
+</body>
+
+</html>
