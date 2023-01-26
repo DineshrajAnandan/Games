@@ -2,6 +2,6 @@
 
 A classic snake game written in JavaScript.
 
-You can use the [link](https://dineshrajanandan.github.io/SnakeGame/) to visit the site.
+You can use the [link](https://dineshrajanandan.github.io/Games/SnakeGame/index.html) to visit the site.
 
-https://dineshrajanandan.github.io/SnakeGame/
+https://dineshrajanandan.github.io/Games/SnakeGame/index.html

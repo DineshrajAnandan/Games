@@ -2,6 +2,6 @@
 
 A classic Tic Tac Toe game written in JavaScript.
 
-You can use the [link](https://dineshrajanandan.github.io/TicTacToe/) to visit the site.
+You can use the [link](https://dineshrajanandan.github.io/Games/TicTacToe/index.html) to visit the site.
 
-https://dineshrajanandan.github.io/TicTacToe/
+https://dineshrajanandan.github.io/Games/TicTacToe/index.html
