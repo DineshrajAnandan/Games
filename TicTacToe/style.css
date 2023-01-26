@@ -1,0 +1,58 @@
+.table-container {
+    margin: auto;
+}
+
+table {
+    border-collapse: collapse;
+    border-style: hidden;
+    margin: auto;
+}
+
+table td {
+    height: 90px !important;
+    width: 90px !important;
+    border: 5px solid black;
+    font-size: 50px;
+    text-align: center;
+    font-family: monospace;
+    padding: 10px;
+}
+
+.header {
+    margin: auto;
+    padding: 10px;
+    text-align: center;
+    font-family: monospace;
+    color: dimgrey;
+}
+
+.header > span {
+    display: inline-flex;
+    padding: 1em 2em;
+    border: 2px solid grey;
+}
+
+#winner-display-div {
+    display: none;
+    margin: auto;
+    text-align: center;
+    margin-top: 3em;
+}
+
+#winner-display-div > span {
+    margin: auto;
+    font-size: x-large;
+    font-family: monospace;
+    margin-right: 2em;
+}
+
+#winner-display-div > button {
+    margin: auto;
+    font-size: x-large;
+    font-family: monospace;
+    margin-left: 2em;
+}
+
+#playWithBotCheck-div {
+    display: block;
+}

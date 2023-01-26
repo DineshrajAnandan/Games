@@ -1,0 +1,45 @@
+<html>
+
+<head>
+    <title>TicTacToe</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js"></script>
+    <script src="bot.js"></script>
+</head>
+
+<body>
+    <div class="header">
+        <h1>TIC-TAC-TOE</h1>
+        <span id="x-stat">X</span>
+        <span id="o-stat" onclick="changeBotsValue('X')">O</span>
+        <div id="playWithBotCheck-div">
+            <input type="checkbox" onchange="togglePlayWithBot(this)" id="playWithBotCheck">
+            <label for="playWithBotCheck">Play with Bot</label>
+        </div>
+    </div>
+    <div class="table-container">
+        <table>
+            <tr>
+                <td id="00"></td>
+                <td id="01"></td>
+                <td id="02"></td>
+            </tr>
+            <tr>
+                <td id="10"></td>
+                <td id="11"></td>
+                <td id="12"></td>
+            </tr>
+            <tr>
+                <td id="20"></td>
+                <td id="21"></td>
+                <td id="22"></td>
+            </tr>
+        </table>
+    </div>
+    <div id="winner-display-div">
+        <span id="winner-display"></span>
+        <button onclick="restartGame()">Restart</button>
+    </div>
+</body>
+
+</html>
