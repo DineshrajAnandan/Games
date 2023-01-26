@@ -1,7 +1,6 @@
-# Frontend Mentor Challenges
+# Game Challenges
 
-This is a collection of solutions for the Frontend Mentor challenges.
+This is a collection of solutions for some of the mini games.
 
-visit [https://dineshrajanandan.github.io/FrontEndMentorChallenges/](https://dineshrajanandan.github.io/FrontEndMentorChallenges/). 
+visit [https://dineshrajanandan.github.io/Games/](https://dineshrajanandan.github.io/games/). 
 
-Frontend Mentor challenges help you improve your coding skills by building realistic projects. 
