@@ -1,0 +1,56 @@
+<html>
+
+<head>
+    <title>Rock Paper Scissor</title>
+    <link rel="icon" href="img/icon.svg" sizes="any" type="image/svg+xml">
+    <link href="./style.css" rel="stylesheet">
+    <script src="./main.js"></script>
+</head>
+
+<body>
+    <div>
+        <span id="reset" onclick="reset()">&#11118;</span>
+        <!-- <button onclick="reset()">reset</button> -->
+    </div>
+    <div class="score-div">
+        <table>
+            <tr class="score-row">
+                <td id="player-score">0</td>
+                <td id="cpu-score">0</td>
+            </tr>
+            <tr class="emoji">
+                <td>&#129489;</td>
+                <td>&#129302;</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="title-header">
+        ROCK-PAPER-SCISSOR
+    </div>
+
+    <div class="prediction">
+        <div id="player-prediction">
+            <img id="player-option" src="img/fist.svg" class="player-prepare-anim">
+            <span>PLAYER</span>
+        </div>
+        <div id="cpu-prediction">
+            <img id="cpu-option" src="img/fist.svg" class="cpu-prepare-anim">
+            <span>CPU</span>
+        </div>
+    </div>
+
+    <div class="player-choice">
+        <button onclick="play('rock')">
+            Rock
+        </button>
+        <button onclick="play('paper')">
+            Paper
+        </button>
+        <button onclick="play('scissor')">
+            Scissor
+        </button>
+    </div>
+</body>
+
+</html>
